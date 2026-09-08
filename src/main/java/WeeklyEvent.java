@@ -1,4 +1,3 @@
-package Default;
 import java.util.GregorianCalendar;
 
 public class WeeklyEvent extends CalendarEvent{

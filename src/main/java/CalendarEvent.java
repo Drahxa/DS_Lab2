@@ -1,5 +1,4 @@
 // Stub file for CalendarEvent
-package Default;
 
 import java.util.GregorianCalendar;
 
