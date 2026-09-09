@@ -16,7 +16,7 @@ public abstract class CalendarEvent{
 	{
 	}
 	
-	public void ScheduleEvent(MeetingCalendar cal)
+	public void scheduleEvent(MeetingCalendar cal)
 	{	
 	}
 	
