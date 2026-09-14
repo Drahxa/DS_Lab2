@@ -1,10 +1,16 @@
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+
+import java.util.Calendar;
+import calendar.Meeting;
+import calendar.MeetingCalendar;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 
 import java.util.GregorianCalendar;
+
 
 
 class CalendarEventTest {
@@ -12,6 +18,7 @@ class CalendarEventTest {
 	OneTimeEvent A;
 	OneTimeEvent B;
 	OneTimeEvent C;
+	MeetingCalendar cal;
 	
 	OneTimeEvent AB;
 	OneTimeEvent BC;
@@ -26,6 +33,8 @@ class CalendarEventTest {
 
 	@BeforeEach // yes, I imported it
 	void setUp() throws Exception{
+		
+		cal = new MeetingCalendar();
 		
 								//year, month, day, hour, minute
 		startA = new GregorianCalendar(2026, 8, 10, 12, 40);
@@ -47,10 +56,20 @@ class CalendarEventTest {
 	}
 	@Test
 	void testCalendarEvent() {
-		assertTrue("ALoc".equals(A.getLoc()));
+		assertEquals("ALoc", A.getLoc());
 		assertEquals("A", A.getDesc());
 		assertEquals(startA, A.getStart());
 		assertEquals(endA, A.getEnd());
+	}
+	
+	@Test
+	void scheduleEvent() {
+		A.scheduleEvent(cal);
+		
+		Meeting booked = cal.findMeeting(startA);
+		
+		assertNotNull(booked);
+		
 	}
 
 	//Q. Can I delete Get/Set Test if I am testing the constructor.
