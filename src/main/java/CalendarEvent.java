@@ -6,10 +6,10 @@ import calendar.MeetingCalendar;
 
 public abstract class CalendarEvent{
 	
-	protected String description;
-	protected String location;
-	protected GregorianCalendar startTime;
-	protected GregorianCalendar endTime;
+	private String description;
+	private String location;
+	private GregorianCalendar startTime;
+	private GregorianCalendar endTime;
 	
 	
 	public CalendarEvent(String desc, String loc, GregorianCalendar start, GregorianCalendar end) 
