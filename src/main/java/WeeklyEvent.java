@@ -1,5 +1,8 @@
 import java.util.GregorianCalendar;
 
+import calendar.Meeting;
+import calendar.MeetingCalendar;
+
 public class WeeklyEvent extends CalendarEvent{
 	
 	private GregorianCalendar repeatUntil;
@@ -7,6 +10,10 @@ public class WeeklyEvent extends CalendarEvent{
 	public WeeklyEvent(String desc, String loc, GregorianCalendar start, GregorianCalendar end, GregorianCalendar repeat) {
 		super(desc, loc, start, end);
 		this.setRepeatUntil(repeat);
+		
+	}
+	
+	public void scheduleEvent(MeetingCalendar cal) {
 		
 	}
 

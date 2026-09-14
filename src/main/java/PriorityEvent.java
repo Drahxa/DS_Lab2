@@ -11,7 +11,7 @@ public class PriorityEvent extends CalendarEvent{
 	
 	public void scheduleEvent(MeetingCalendar cal) {
 		Meeting m = new Meeting(getDesc(), getLoc(), getStart(), getEnd());
-		cal.addMeeting(m);
+		cal.addMeeting(m, true);
 	}
 
 }
