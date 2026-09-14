@@ -53,6 +53,10 @@ class CalendarEventTest {
 							
 		AB = new OneTimeEvent("AB", "ABLoc", startAB, endAB);
 		BC = new OneTimeEvent("BC", "BCLoc", endAB, endBC);
+		
+		
+		
+		
 	}
 	@Test
 	void testCalendarEvent() {
@@ -63,7 +67,7 @@ class CalendarEventTest {
 	}
 	
 	@Test
-	void scheduleEvent() {
+	void testscheduleEvent() {
 		A.scheduleEvent(cal);
 		
 		Meeting booked = cal.findMeeting(startA);
@@ -71,6 +75,23 @@ class CalendarEventTest {
 		assertNotNull(booked);
 		assertEquals("A", booked.getDescription());
 		assertEquals("ALoc", booked.getLocation());
+		
+	}
+	
+	@Test
+	void testPriorityEvent() {
+		A.scheduleEvent(cal);
+		
+		PriorityEvent r = new PriorityEvent("r", "rLoc", startA, endA);
+		
+		r.scheduleEvent(cal);
+		
+		Meeting booked = cal.findMeeting(startA);
+		
+		assertNotNull(booked);
+		assertEquals("r", booked.getDescription());
+		assertEquals("rLoc", booked.getLocation());
+
 		
 	}
 

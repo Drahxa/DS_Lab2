@@ -23,8 +23,6 @@ public abstract class CalendarEvent{
 	
 	public void scheduleEvent(MeetingCalendar cal)
 	{	
-		Meeting m = new Meeting(getDesc(), getLoc(), getStart(), getEnd());
-		cal.addMeeting(m);
 	}
 	
 	public String getDesc()
