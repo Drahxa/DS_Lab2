@@ -37,7 +37,7 @@ class CalendarEventTest {
 		cal = new MeetingCalendar();
 		
 								//year, month, day, hour, minute
-		startA = new GregorianCalendar(2026, 8, 10, 12, 40);
+		startA = new GregorianCalendar(2026, 8, 10, 1, 40);
 		endA = new GregorianCalendar(2026, 8, 10, 2, 10);
 		startAB = new GregorianCalendar(2021, 2, 2, 7, 0);
 		endB = new GregorianCalendar(2021, 2, 2, 7, 30);
@@ -69,6 +69,8 @@ class CalendarEventTest {
 		Meeting booked = cal.findMeeting(startA);
 		
 		assertNotNull(booked);
+		assertEquals("A", booked.getDescription());
+		assertEquals("ALoc", booked.getLocation());
 		
 	}
 

@@ -1,6 +1,7 @@
 import java.util.GregorianCalendar;
 
 import calendar.MeetingCalendar;
+import calendar.Meeting;
 
 public class OneTimeEvent extends CalendarEvent{
 
