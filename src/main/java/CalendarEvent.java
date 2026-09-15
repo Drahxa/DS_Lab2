@@ -25,22 +25,22 @@ public abstract class CalendarEvent{
 	{	
 	}
 	
-	public String getDesc()
+	public String getDescription()
 	{
 		return description;
 	}
 	
-	public String getLoc()
+	public String getLocation()
 	{
 		return location;
 	}
 	
-	public GregorianCalendar getStart()
+	public GregorianCalendar getStartTime()
 	{
 		return startTime;
 	}
 	
-	public GregorianCalendar getEnd()
+	public GregorianCalendar getEndTime()
 	{
 		return endTime;
 	}

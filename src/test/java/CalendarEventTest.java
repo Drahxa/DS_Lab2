@@ -84,27 +84,27 @@ class CalendarEventTest {
 	}
 	@Test
 	void testCalendarEvent() {
-		assertEquals("ALoc", A.getLoc());
-		assertEquals("A", A.getDesc());
-		assertEquals(startA, A.getStart());
-		assertEquals(endA, A.getEnd());
+		assertEquals("ALoc", A.getLocation());
+		assertEquals("A", A.getDescription());
+		assertEquals(startA, A.getStartTime());
+		assertEquals(endA, A.getEndTime());
 	}
 	
 	@Test
 	void testPriorityEventConstructor() {
-		assertEquals("PELoc", PE.getLoc());
-		assertEquals("PE", PE.getDesc());
-		assertEquals(startA, PE.getStart());
-		assertEquals(endA, PE.getEnd());
+		assertEquals("PELoc", PE.getLocation());
+		assertEquals("PE", PE.getDescription());
+		assertEquals(startA, PE.getStartTime());
+		assertEquals(endA, PE.getEndTime());
 	}
 	
 	@Test
 	void testWeeklyEventConstructor() {
 		WeeklyEvent WE = new WeeklyEvent("we", "weLoc", startWE, endWE, repeat);
-		assertEquals("weLoc", WE.getLoc());
-		assertEquals("we", WE.getDesc());
-		assertEquals(startWE, WE.getStart());
-		assertEquals(endWE, WE.getEnd());
+		assertEquals("weLoc", WE.getLocation());
+		assertEquals("we", WE.getDescription());
+		assertEquals(startWE, WE.getStartTime());
+		assertEquals(endWE, WE.getEndTime());
 		assertEquals(repeat, WE.getRepeatUntil());
 		
 	}
@@ -114,10 +114,10 @@ class CalendarEventTest {
 		int[] days = {Calendar.SATURDAY, Calendar.FRIDAY};
 		MultiDayPerWeekEvent MDPWE =  new MultiDayPerWeekEvent("MDPW", "MDPWLoc",startWE, endWE, repeat, days);
 		
-		assertEquals("MDPWLoc", MDPWE.getLoc());
-		assertEquals("MDPW", MDPWE.getDesc());
-		assertEquals(startWE, MDPWE.getStart());
-		assertEquals(endWE, MDPWE.getEnd());
+		assertEquals("MDPWLoc", MDPWE.getLocation());
+		assertEquals("MDPW", MDPWE.getDescription());
+		assertEquals(startWE, MDPWE.getStartTime());
+		assertEquals(endWE, MDPWE.getEndTime());
 		assertEquals(repeat, MDPWE.getRepeatUntil());
 		assertNotNull(days);
 	}
