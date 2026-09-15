@@ -23,11 +23,17 @@ class CalendarEventTest {
 	OneTimeEvent AB;
 	OneTimeEvent BC;
 	
+	PriorityEvent PE;
+	
 	GregorianCalendar startA;
 	GregorianCalendar endA;
 	GregorianCalendar startAB;
 	GregorianCalendar endB;
 	GregorianCalendar endC;
+	
+	GregorianCalendar startWE;
+	GregorianCalendar endWE;
+	GregorianCalendar repeat;
 	
 	
 
@@ -42,6 +48,14 @@ class CalendarEventTest {
 		startAB = new GregorianCalendar(2021, 2, 2, 7, 0);
 		endB = new GregorianCalendar(2021, 2, 2, 7, 30);
 		endC = new GregorianCalendar(2021, 2, 2, 8, 30);
+		repeat = new GregorianCalendar(2022, 3, 2, 9, 30);
+		
+		GregorianCalendar startWE = new GregorianCalendar(2021, 2, 2, 7, 30);
+		
+
+		startWE = new GregorianCalendar(2022, 2, 2, 8, 30);
+		endWE = new GregorianCalendar(2022, 2, 2, 9, 30);
+		
 		
 		GregorianCalendar endAB = new GregorianCalendar(2021, 2, 2, 8, 30);
 		GregorianCalendar endBC = new GregorianCalendar(2021, 2, 2, 9, 30);
@@ -56,6 +70,16 @@ class CalendarEventTest {
 		
 		
 		
+		PE = new PriorityEvent("PE", "PELoc", startA, endA);
+		
+
+		
+		
+		
+		
+		
+		
+		
 		
 	}
 	@Test
@@ -64,6 +88,38 @@ class CalendarEventTest {
 		assertEquals("A", A.getDesc());
 		assertEquals(startA, A.getStart());
 		assertEquals(endA, A.getEnd());
+	}
+	
+	@Test
+	void testPriorityEventConstructor() {
+		assertEquals("PELoc", PE.getLoc());
+		assertEquals("PE", PE.getDesc());
+		assertEquals(startA, PE.getStart());
+		assertEquals(endA, PE.getEnd());
+	}
+	
+	@Test
+	void testWeeklyEventConstructor() {
+		WeeklyEvent WE = new WeeklyEvent("we", "weLoc", startWE, endWE, repeat);
+		assertEquals("weLoc", WE.getLoc());
+		assertEquals("we", WE.getDesc());
+		assertEquals(startWE, WE.getStart());
+		assertEquals(endWE, WE.getEnd());
+		assertEquals(repeat, WE.getRepeatUntil());
+		
+	}
+
+	@Test
+	void testMultiDayPerWeekEventConstructor() {
+		int[] days = {Calendar.SATURDAY, Calendar.FRIDAY};
+		MultiDayPerWeekEvent MDPWE =  new MultiDayPerWeekEvent("MDPW", "MDPWLoc",startWE, endWE, repeat, days);
+		
+		assertEquals("MDPWLoc", MDPWE.getLoc());
+		assertEquals("MDPW", MDPWE.getDesc());
+		assertEquals(startWE, MDPWE.getStart());
+		assertEquals(endWE, MDPWE.getEnd());
+		assertEquals(repeat, MDPWE.getRepeatUntil());
+		assertNotNull(days);
 	}
 	
 	@Test
@@ -95,24 +151,52 @@ class CalendarEventTest {
 		
 	}
 	
+	@Test
 	void testWeeklyEvent() {
-		GregorianCalendar until = new GregorianCalendar(2026, 8, 14, 23, 59);
+		GregorianCalendar until = new GregorianCalendar(2026, 8, 24, 23, 59);
 		WeeklyEvent w = new WeeklyEvent("W", "WLoc", startA, endA, until);
 		w.scheduleEvent(cal);
 		
 		GregorianCalendar week2 = (GregorianCalendar) startA.clone();
 		week2.add(Calendar.DATE, 7);
+		
 		GregorianCalendar week3 = (GregorianCalendar) startA.clone();
 		week3.add(Calendar.DATE, 14);
+		
 		GregorianCalendar week4 = (GregorianCalendar) startA.clone();
 		week4.add(Calendar.DATE, 21);
-	}
+		
+		assertNotNull(cal.findMeeting(startA));
+		assertNotNull(cal.findMeeting(week2));
+		assertNotNull(cal.findMeeting(week3));
+		assertNull(cal.findMeeting(week4));
+		}
+	
+	@Test 
+	void testMultiDayPerWeekEvent() {
+		GregorianCalendar until = new GregorianCalendar(2026, 8, 13 ,23, 59);
+		int[] days = { Calendar.THURSDAY, Calendar.SATURDAY};
+		
+		MultiDayPerWeekEvent m = new MultiDayPerWeekEvent("m", "mLoc", startA, endA, until, days);
+		
+		m.scheduleEvent(cal);
+		
+		GregorianCalendar friday = (GregorianCalendar) startA.clone();
+		friday.add(Calendar.DATE, 1);
 
-	//Q. Can I delete Get/Set Test if I am testing the constructor.
-//	@Test
-//	void testScheduleEvent() {
-//		assertFalse();
-//	}
+		GregorianCalendar saturday = (GregorianCalendar) startA.clone();
+		saturday.add(Calendar.DATE, 2);
+
+		GregorianCalendar nextWeek = (GregorianCalendar) startA.clone();
+		nextWeek.add(Calendar.DATE, 7);
+		
+		
+		assertNotNull(cal.findMeeting(startA));
+		assertNull(cal.findMeeting(friday));
+		assertNotNull(cal.findMeeting(saturday));
+		assertNull(cal.findMeeting(nextWeek));
+		assertEquals("m", cal.findMeeting(startA).getDescription());
+	}
 
 
 

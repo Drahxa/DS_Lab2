@@ -1,6 +1,8 @@
 import java.util.GregorianCalendar;
 
 import calendar.MeetingCalendar;
+import calendar.Meeting;
+import java.util.Calendar;
 
 public class MultiDayPerWeekEvent extends CalendarEvent {
 	
@@ -11,12 +13,9 @@ public class MultiDayPerWeekEvent extends CalendarEvent {
 			GregorianCalendar start, GregorianCalendar end, GregorianCalendar repeat, int[]days) {
 		
 		super(desc, loc, start, end);
-		this.setRepeatUntil(repeat); 
-		this.setDays(days);
-	}
+		this.repeatUntil = repeat; 
+		this.days = days;
 	
-	public void scheduleEvent(MeetingCalendar cal) {
-		
 	}
 
 	public GregorianCalendar getRepeatUntil() {
