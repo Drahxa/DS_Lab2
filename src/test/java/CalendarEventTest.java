@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Calendar;
 import calendar.Meeting;
 import calendar.MeetingCalendar;
+import CalendarEvent;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
