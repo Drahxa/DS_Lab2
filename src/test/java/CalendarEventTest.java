@@ -60,10 +60,10 @@ class CalendarEventTest {
 	}
 	@Test
 	void testCalendarEvent() {
-		assertEquals("ALoc", A.getLoc());
-		assertEquals("A", A.getDesc());
-		assertEquals(startA, A.getStart());
-		assertEquals(endA, A.getEnd());
+		assertEquals("ALoc", A.getLocation());
+		assertEquals("A", A.getDescription());
+		assertEquals(startA, A.getStartTime());
+		assertEquals(endA, A.getEndTime());
 	}
 	
 	@Test
