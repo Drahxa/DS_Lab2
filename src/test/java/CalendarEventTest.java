@@ -158,7 +158,17 @@ class CalendarEventTest {
     	WeeklyEvent w = new WeeklyEvent("W", "WLoc", startA, endA, until);
     	w.scheduleEvent(cal);
 
+   		GregorianCalendar week2 = (GregorianCalendar) startA.clone();
+		week2.add(Calendar.DATE, 7);
+    	GregorianCalendar week3 = (GregorianCalendar) startA.clone();
+    	week3.add(Calendar.DATE, 14);
+    	GregorianCalendar week4 = (GregorianCalendar) startA.clone();
+    	week4.add(Calendar.DATE, 21);
+
    		assertEquals("A", cal.findMeeting(startA).getDescription());
+    	assertEquals("W", cal.findMeeting(week2).getDescription());
+    	assertEquals("W", cal.findMeeting(week3).getDescription());
+    	assertNull(cal.findMeeting(week4));
 		}
 
 	@Test
@@ -170,7 +180,7 @@ class CalendarEventTest {
 		MultiDayPerWeekEvent m = new MultiDayPerWeekEvent("m", "mLoc", startA, endA, until, days);
 		m.scheduleEvent(cal);
 
-    assertEquals("A", cal.findMeeting(startA).getDescription());
+    	assertEquals("A", cal.findMeeting(startA).getDescription());
 	}
 	
 	@Test 
@@ -186,9 +196,15 @@ class CalendarEventTest {
      	GregorianCalendar saturday = (GregorianCalendar) startA.clone();
      	saturday.add(Calendar.DATE, 2);
 
+		GregorianCalendar nextThursday = (GregorianCalendar) startA.clone();
+		nextThursday.add(Calendar.DATE, 7);
+		
+		
      	assertNotNull(cal.findMeeting(startA));     
      	assertNull(cal.findMeeting(friday));        
-     	assertNotNull(cal.findMeeting(saturday));   
+     	assertNotNull(cal.findMeeting(saturday));  
+		assertNull(cal.findMeeting(nextThursday));
+     	
 	}
 
 
