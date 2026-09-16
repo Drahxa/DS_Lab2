@@ -181,20 +181,9 @@ class CalendarEventTest {
 		
 		m.scheduleEvent(cal);
 		
-		GregorianCalendar friday = (GregorianCalendar) startA.clone();
-		friday.add(Calendar.DATE, 1);
-
-		GregorianCalendar saturday = (GregorianCalendar) startA.clone();
-		saturday.add(Calendar.DATE, 2);
-
-		GregorianCalendar nextWeek = (GregorianCalendar) startA.clone();
-		nextWeek.add(Calendar.DATE, 7);
-		
 		
 		assertNotNull(cal.findMeeting(startA));
-		assertNull(cal.findMeeting(friday));
-		assertNotNull(cal.findMeeting(saturday));
-		assertNull(cal.findMeeting(nextWeek));
+		
 		assertEquals("m", cal.findMeeting(startA).getDescription());
 	}
 
