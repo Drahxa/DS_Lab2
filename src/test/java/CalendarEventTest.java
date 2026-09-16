@@ -49,9 +49,6 @@ class CalendarEventTest {
 		endB = new GregorianCalendar(2021, 2, 2, 7, 30);
 		endC = new GregorianCalendar(2021, 2, 2, 8, 30);
 		repeat = new GregorianCalendar(2022, 3, 2, 9, 30);
-		
-		GregorianCalendar startWE = new GregorianCalendar(2021, 2, 2, 7, 30);
-		
 
 		startWE = new GregorianCalendar(2022, 2, 2, 8, 30);
 		endWE = new GregorianCalendar(2022, 2, 2, 9, 30);
@@ -120,6 +117,7 @@ class CalendarEventTest {
 		assertEquals(endWE, MDPWE.getEndTime());
 		assertEquals(repeat, MDPWE.getRepeatUntil());
 		assertNotNull(days);
+		assertArrayEquals(days, MDPWE.getDays());
 	}
 	
 	
@@ -134,42 +132,63 @@ class CalendarEventTest {
 	
 	@Test
 	void testPriorityEvent() {
-		PriorityEvent r = new PriorityEvent("r", "rLoc", startA, endA);
+		A.scheduleEvent(cal);
 
-		assertEquals("rLoc", cal.findMeeting(startA).getLocation());
+   		PriorityEvent r = new PriorityEvent("r", "rLoc", startA, endA);
+     	r.scheduleEvent(cal);
 
-		
+    	assertEquals("r", cal.findMeeting(startA).getDescription());
 	}
-	
+
+	@Test
+	void testOneTimeDoesNotOverride(){
+		A.scheduleEvent(cal);
+
+    	OneTimeEvent ote = new OneTimeEvent("ote", "oteLoc", startA, endA);
+    	ote.scheduleEvent(cal);
+
+    	assertEquals("A", cal.findMeeting(startA).getDescription());
+	}
 	@Test
 	void testWeeklyEvent() {
-		GregorianCalendar until = new GregorianCalendar(2026, 8, 24, 23, 59);
-		WeeklyEvent w = new WeeklyEvent("W", "WLoc", startA, endA, until);
 		
-		GregorianCalendar week2 = (GregorianCalendar) startA.clone();
-		
-		GregorianCalendar week3 = (GregorianCalendar) startA.clone();
-		
-		GregorianCalendar week4 = (GregorianCalendar) startA.clone();
-		
-		assertNotNull(cal.findMeeting(startA));
-		assertNotNull(cal.findMeeting(week2));
-		assertNotNull(cal.findMeeting(week3));
-		assertNull(cal.findMeeting(week4));
+		A.scheduleEvent(cal);
+
+    	GregorianCalendar until = new GregorianCalendar(2026, 8, 24, 23, 59);
+    	WeeklyEvent w = new WeeklyEvent("W", "WLoc", startA, endA, until);
+    	w.scheduleEvent(cal);
+
+   		assertEquals("A", cal.findMeeting(startA).getDescription());
 		}
+
+	@Test
+	void testMultiDoesNotOverride(){
+		A.scheduleEvent(cal);
+		GregorianCalendar until = new GregorianCalendar(2026, 8, 13, 23, 59);
+		int[] days = { Calendar.THURSDAY, Calendar.SATURDAY };
+   
+		MultiDayPerWeekEvent m = new MultiDayPerWeekEvent("m", "mLoc", startA, endA, until, days);
+		m.scheduleEvent(cal);
+
+    assertEquals("A", cal.findMeeting(startA).getDescription());
+	}
 	
 	@Test 
 	void testMultiDayPerWeekEvent() {
-		GregorianCalendar until = new GregorianCalendar(2026, 8, 13 ,23, 59);
-		int[] days = { Calendar.THURSDAY, Calendar.SATURDAY};
-		
-		MultiDayPerWeekEvent m = new MultiDayPerWeekEvent("m", "mLoc", startA, endA, until, days);
-		
-		
-		
-		assertNotNull(cal.findMeeting(startA));
-		
-		assertEquals("m", cal.findMeeting(startA).getDescription());
+		GregorianCalendar until = new GregorianCalendar(2026, 8, 13, 23, 59);
+   		int[] days = { Calendar.THURSDAY, Calendar.SATURDAY };
+     	MultiDayPerWeekEvent m = new MultiDayPerWeekEvent("m", "mLoc", startA, endA, until, days);
+     	m.scheduleEvent(cal);
+
+    	 GregorianCalendar friday = (GregorianCalendar) startA.clone();
+     	friday.add(Calendar.DATE, 1);
+
+     	GregorianCalendar saturday = (GregorianCalendar) startA.clone();
+     	saturday.add(Calendar.DATE, 2);
+
+     	assertNotNull(cal.findMeeting(startA));     
+     	assertNull(cal.findMeeting(friday));        
+     	assertNotNull(cal.findMeeting(saturday));   
 	}
 
 
