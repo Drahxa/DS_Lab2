@@ -21,18 +21,19 @@ public class MultiDayPerWeekEvent extends CalendarEvent {
 		GregorianCalendar startDate = (GregorianCalendar) getStartTime().clone();
 		GregorianCalendar endDate = (GregorianCalendar) getEndTime().clone();
 		
-		int today = startDate.get(Calendar.DAY_OF_WEEK);
+	
 		while(startDate.compareTo(getRepeatUntil()) <= 0) {
+			int today = startDate.get(Calendar.DAY_OF_WEEK);
 			
 			for(int day: getDays()) {
 				if (day == today) {
 					Meeting m = new Meeting(getDescription(), getLocation(), startDate, endDate);
 					cal.addMeeting(m);
 				}
-				startDate.add(Calendar.DATE, 1);
-				endDate.add(Calendar.DATE, 1);
+				
 			}
-			
+			startDate.add(Calendar.DATE, 1);
+			endDate.add(Calendar.DATE, 1);
 		}
 		
 		 
