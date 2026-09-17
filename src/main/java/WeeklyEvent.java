@@ -18,7 +18,7 @@ public class WeeklyEvent extends CalendarEvent{
 		GregorianCalendar startDate = (GregorianCalendar)getStartTime().clone();
 		GregorianCalendar endDate = (GregorianCalendar)getEndTime().clone();
 		
-		while(startDate.compareTo(endDate) <= 0) {
+		while(startDate.compareTo(getRepeatUntil()) <= 0) {
 			Meeting m = new Meeting(getDescription(), getLocation(), getStartTime(), getEndTime());
 			cal.addMeeting(m);
 			

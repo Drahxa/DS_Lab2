@@ -160,8 +160,10 @@ class CalendarEventTest {
 
    		GregorianCalendar week2 = (GregorianCalendar) startA.clone();
 		week2.add(Calendar.DATE, 7);
+		
     	GregorianCalendar week3 = (GregorianCalendar) startA.clone();
     	week3.add(Calendar.DATE, 14);
+   
     	GregorianCalendar week4 = (GregorianCalendar) startA.clone();
     	week4.add(Calendar.DATE, 21);
 

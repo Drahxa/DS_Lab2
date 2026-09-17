@@ -17,24 +17,41 @@ public class MultiDayPerWeekEvent extends CalendarEvent {
 	
 	}
 	
-	public void scheduleEvent() {
+	public void scheduleEvent(MeetingCalendar cal) {
+		GregorianCalendar startDate = (GregorianCalendar) getStartTime().clone();
+		GregorianCalendar endDate = (GregorianCalendar) getEndTime().clone();
 		
+		int today = startDate.get(Calendar.DAY_OF_WEEK);
+		while(startDate.compareTo(getRepeatUntil()) <= 0) {
+			
+			for(int day: getDays()) {
+				if (day == today) {
+					Meeting m = new Meeting(getDescription(), getLocation(), getStartTime(), getEndTime());
+					cal.addMeeting(m);
+				}
+				startDate.add(Calendar.DATE, 1);
+				endDate.add(Calendar.DATE, 1);
+			}
+			
+		}
+		
+		 
 	}
 
 	public GregorianCalendar getRepeatUntil() {
 		return repeatUntil;
 	}
 
-	public void setRepeatUntil(GregorianCalendar repeatUntil) {
-		this.repeatUntil = repeatUntil;
+	public void setRepeatUntil(GregorianCalendar repeatUntill) {
+		this.repeatUntil = repeatUntill;
 	}
 
 	public int[] getDays() {
 		return days;
 	}
 
-	public void setDays(int[] days) {
-		this.days = days;
+	public void setDays(int[] dayss) {
+		this.days = dayss;
 	}
 	
 
