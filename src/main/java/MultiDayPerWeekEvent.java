@@ -9,9 +9,8 @@ public class MultiDayPerWeekEvent extends CalendarEvent {
 	private GregorianCalendar repeatUntil;
 	private int[] days;
 
-	public MultiDayPerWeekEvent(String desc, String loc, 
-			GregorianCalendar start, GregorianCalendar end, GregorianCalendar repeat, int[]days) {
-		
+	public MultiDayPerWeekEvent(String desc, String loc, GregorianCalendar start, 
+			GregorianCalendar end, GregorianCalendar repeat, int[]days) {
 		super(desc, loc, start, end);
 		this.repeatUntil = repeat; 
 		this.days = days;

@@ -23,6 +23,10 @@ public abstract class CalendarEvent{
 	
 	public void scheduleEvent(MeetingCalendar cal)
 	{	
+		Meeting m = new Meeting(getDescription(), getLocation(), getStartTime(), getEndTime());
+		if(!m.overlaps(getEndTime())) {
+			cal.addMeeting(m);
+		}
 	}
 	
 	public String getDescription()
