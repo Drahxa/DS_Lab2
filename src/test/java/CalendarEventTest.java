@@ -192,7 +192,7 @@ class CalendarEventTest {
      	MultiDayPerWeekEvent m = new MultiDayPerWeekEvent("m", "mLoc", startA, endA, until, days);
      	m.scheduleEvent(cal);
 
-    	 GregorianCalendar friday = (GregorianCalendar) startA.clone();
+    	GregorianCalendar friday = (GregorianCalendar) startA.clone();
      	friday.add(Calendar.DATE, 1);
 
      	GregorianCalendar saturday = (GregorianCalendar) startA.clone();

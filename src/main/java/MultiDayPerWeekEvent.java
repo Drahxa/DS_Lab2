@@ -26,7 +26,7 @@ public class MultiDayPerWeekEvent extends CalendarEvent {
 			
 			for(int day: getDays()) {
 				if (day == today) {
-					Meeting m = new Meeting(getDescription(), getLocation(), getStartTime(), getEndTime());
+					Meeting m = new Meeting(getDescription(), getLocation(), startDate, endDate);
 					cal.addMeeting(m);
 				}
 				startDate.add(Calendar.DATE, 1);
@@ -42,16 +42,16 @@ public class MultiDayPerWeekEvent extends CalendarEvent {
 		return repeatUntil;
 	}
 
-	public void setRepeatUntil(GregorianCalendar repeatUntill) {
-		this.repeatUntil = repeatUntill;
+	public void setRepeatUntil(GregorianCalendar repeatUntil) {
+		this.repeatUntil = repeatUntil;
 	}
 
 	public int[] getDays() {
 		return days;
 	}
 
-	public void setDays(int[] dayss) {
-		this.days = dayss;
+	public void setDays(int[] days) {
+		this.days = days;
 	}
 	
 
