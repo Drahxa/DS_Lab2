@@ -16,6 +16,10 @@ public class MultiDayPerWeekEvent extends CalendarEvent {
 		this.days = days;
 	
 	}
+	
+	public void scheduleEvent() {
+		
+	}
 
 	public GregorianCalendar getRepeatUntil() {
 		return repeatUntil;

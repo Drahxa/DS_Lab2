@@ -132,13 +132,7 @@ class CalendarEventTest {
 	
 	@Test
 	void testPriorityEvent() {
-<<<<<<< HEAD
-		PriorityEvent r = new PriorityEvent("r", "rLoc", startA, endA);
-
-		assertEquals("rLoc", cal.findMeeting(startA).getLocation());
-=======
 		A.scheduleEvent(cal);
->>>>>>> f7d43326619320469f8f44f91f0208cb934d4c78
 
    		PriorityEvent r = new PriorityEvent("r", "rLoc", startA, endA);
      	r.scheduleEvent(cal);
@@ -157,21 +151,6 @@ class CalendarEventTest {
 	}
 	@Test
 	void testWeeklyEvent() {
-<<<<<<< HEAD
-		GregorianCalendar until = new GregorianCalendar(2026, 8, 24, 23, 59);
-		WeeklyEvent w = new WeeklyEvent("W", "WLoc", startA, endA, until);
-		
-		GregorianCalendar week2 = (GregorianCalendar) startA.clone();
-		
-		GregorianCalendar week3 = (GregorianCalendar) startA.clone();
-		
-		GregorianCalendar week4 = (GregorianCalendar) startA.clone();
-		
-		assertNotNull(cal.findMeeting(startA));
-		assertNotNull(cal.findMeeting(week2));
-		assertNotNull(cal.findMeeting(week3));
-		assertNull(cal.findMeeting(week4));
-=======
 		
 		A.scheduleEvent(cal);
 
@@ -190,7 +169,6 @@ class CalendarEventTest {
     	assertEquals("W", cal.findMeeting(week2).getDescription());
     	assertEquals("W", cal.findMeeting(week3).getDescription());
     	assertNull(cal.findMeeting(week4));
->>>>>>> f7d43326619320469f8f44f91f0208cb934d4c78
 		}
 
 	@Test
@@ -207,18 +185,6 @@ class CalendarEventTest {
 	
 	@Test 
 	void testMultiDayPerWeekEvent() {
-<<<<<<< HEAD
-		GregorianCalendar until = new GregorianCalendar(2026, 8, 13 ,23, 59);
-		int[] days = { Calendar.THURSDAY, Calendar.SATURDAY};
-		
-		MultiDayPerWeekEvent m = new MultiDayPerWeekEvent("m", "mLoc", startA, endA, until, days);
-		
-		
-		
-		assertNotNull(cal.findMeeting(startA));
-		
-		assertEquals("m", cal.findMeeting(startA).getDescription());
-=======
 		GregorianCalendar until = new GregorianCalendar(2026, 8, 13, 23, 59);
    		int[] days = { Calendar.THURSDAY, Calendar.SATURDAY };
      	MultiDayPerWeekEvent m = new MultiDayPerWeekEvent("m", "mLoc", startA, endA, until, days);
@@ -239,7 +205,6 @@ class CalendarEventTest {
      	assertNotNull(cal.findMeeting(saturday));  
 		assertNull(cal.findMeeting(nextThursday));
      	
->>>>>>> f7d43326619320469f8f44f91f0208cb934d4c78
 	}
 
 

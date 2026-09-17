@@ -15,6 +15,16 @@ public class WeeklyEvent extends CalendarEvent{
 	}
 	
 	public void scheduleEvent(MeetingCalendar cal) {
+		GregorianCalendar startDate = (GregorianCalendar)getStartTime().clone();
+		GregorianCalendar endDate = (GregorianCalendar)getEndTime().clone();
+		
+		while(startDate.compareTo(endDate) <= 0) {
+			Meeting m = new Meeting(getDescription(), getLocation(), getStartTime(), getEndTime());
+			cal.addMeeting(m);
+			
+			startDate.add(Calendar.DATE, 7);
+			endDate.add(Calendar.DATE, 7);
+		}
 	}
 
 	public GregorianCalendar getRepeatUntil() {
