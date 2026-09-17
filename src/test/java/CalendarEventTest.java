@@ -49,9 +49,6 @@ class CalendarEventTest {
 		endB = new GregorianCalendar(2021, 2, 2, 7, 30);
 		endC = new GregorianCalendar(2021, 2, 2, 8, 30);
 		repeat = new GregorianCalendar(2022, 3, 2, 9, 30);
-		
-		GregorianCalendar startWE = new GregorianCalendar(2021, 2, 2, 7, 30);
-		
 
 		startWE = new GregorianCalendar(2022, 2, 2, 8, 30);
 		endWE = new GregorianCalendar(2022, 2, 2, 9, 30);
@@ -120,6 +117,7 @@ class CalendarEventTest {
 		assertEquals(endWE, MDPWE.getEndTime());
 		assertEquals(repeat, MDPWE.getRepeatUntil());
 		assertNotNull(days);
+		assertArrayEquals(days, MDPWE.getDays());
 	}
 	
 	
@@ -134,15 +132,32 @@ class CalendarEventTest {
 	
 	@Test
 	void testPriorityEvent() {
+<<<<<<< HEAD
 		PriorityEvent r = new PriorityEvent("r", "rLoc", startA, endA);
 
 		assertEquals("rLoc", cal.findMeeting(startA).getLocation());
+=======
+		A.scheduleEvent(cal);
+>>>>>>> f7d43326619320469f8f44f91f0208cb934d4c78
 
-		
+   		PriorityEvent r = new PriorityEvent("r", "rLoc", startA, endA);
+     	r.scheduleEvent(cal);
+
+    	assertEquals("r", cal.findMeeting(startA).getDescription());
 	}
-	
+
+	@Test
+	void testOneTimeDoesNotOverride(){
+		A.scheduleEvent(cal);
+
+    	OneTimeEvent ote = new OneTimeEvent("ote", "oteLoc", startA, endA);
+    	ote.scheduleEvent(cal);
+
+    	assertEquals("A", cal.findMeeting(startA).getDescription());
+	}
 	@Test
 	void testWeeklyEvent() {
+<<<<<<< HEAD
 		GregorianCalendar until = new GregorianCalendar(2026, 8, 24, 23, 59);
 		WeeklyEvent w = new WeeklyEvent("W", "WLoc", startA, endA, until);
 		
@@ -156,10 +171,43 @@ class CalendarEventTest {
 		assertNotNull(cal.findMeeting(week2));
 		assertNotNull(cal.findMeeting(week3));
 		assertNull(cal.findMeeting(week4));
+=======
+		
+		A.scheduleEvent(cal);
+
+    	GregorianCalendar until = new GregorianCalendar(2026, 8, 24, 23, 59);
+    	WeeklyEvent w = new WeeklyEvent("W", "WLoc", startA, endA, until);
+    	w.scheduleEvent(cal);
+
+   		GregorianCalendar week2 = (GregorianCalendar) startA.clone();
+		week2.add(Calendar.DATE, 7);
+    	GregorianCalendar week3 = (GregorianCalendar) startA.clone();
+    	week3.add(Calendar.DATE, 14);
+    	GregorianCalendar week4 = (GregorianCalendar) startA.clone();
+    	week4.add(Calendar.DATE, 21);
+
+   		assertEquals("A", cal.findMeeting(startA).getDescription());
+    	assertEquals("W", cal.findMeeting(week2).getDescription());
+    	assertEquals("W", cal.findMeeting(week3).getDescription());
+    	assertNull(cal.findMeeting(week4));
+>>>>>>> f7d43326619320469f8f44f91f0208cb934d4c78
 		}
+
+	@Test
+	void testMultiDoesNotOverride(){
+		A.scheduleEvent(cal);
+		GregorianCalendar until = new GregorianCalendar(2026, 8, 13, 23, 59);
+		int[] days = { Calendar.THURSDAY, Calendar.SATURDAY };
+   
+		MultiDayPerWeekEvent m = new MultiDayPerWeekEvent("m", "mLoc", startA, endA, until, days);
+		m.scheduleEvent(cal);
+
+    	assertEquals("A", cal.findMeeting(startA).getDescription());
+	}
 	
 	@Test 
 	void testMultiDayPerWeekEvent() {
+<<<<<<< HEAD
 		GregorianCalendar until = new GregorianCalendar(2026, 8, 13 ,23, 59);
 		int[] days = { Calendar.THURSDAY, Calendar.SATURDAY};
 		
@@ -170,6 +218,28 @@ class CalendarEventTest {
 		assertNotNull(cal.findMeeting(startA));
 		
 		assertEquals("m", cal.findMeeting(startA).getDescription());
+=======
+		GregorianCalendar until = new GregorianCalendar(2026, 8, 13, 23, 59);
+   		int[] days = { Calendar.THURSDAY, Calendar.SATURDAY };
+     	MultiDayPerWeekEvent m = new MultiDayPerWeekEvent("m", "mLoc", startA, endA, until, days);
+     	m.scheduleEvent(cal);
+
+    	 GregorianCalendar friday = (GregorianCalendar) startA.clone();
+     	friday.add(Calendar.DATE, 1);
+
+     	GregorianCalendar saturday = (GregorianCalendar) startA.clone();
+     	saturday.add(Calendar.DATE, 2);
+
+		GregorianCalendar nextThursday = (GregorianCalendar) startA.clone();
+		nextThursday.add(Calendar.DATE, 7);
+		
+		
+     	assertNotNull(cal.findMeeting(startA));     
+     	assertNull(cal.findMeeting(friday));        
+     	assertNotNull(cal.findMeeting(saturday));  
+		assertNull(cal.findMeeting(nextThursday));
+     	
+>>>>>>> f7d43326619320469f8f44f91f0208cb934d4c78
 	}
 
 
