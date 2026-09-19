@@ -27,7 +27,9 @@ public class MultiDayPerWeekEvent extends CalendarEvent {
 			
 			for(int day: getDays()) {
 				if (day == today) {
-					Meeting m = new Meeting(getDescription(), getLocation(), startDate, endDate);
+					GregorianCalendar starting = (GregorianCalendar) startDate.clone();
+					GregorianCalendar ending = (GregorianCalendar) endDate.clone();
+					Meeting m = new Meeting(getDescription(), getLocation(), starting, ending);
 					cal.addMeeting(m);
 				}
 				
